@@ -1,14 +1,15 @@
 import './App.css'
 import Browse from './Components/Browse'
-import Header from './Components/Header'
+ 
+import Login from './components/Login'
  
 function App() {
   
 
   return (
     <>
-       <Header/>
-       <Browse/>
+      <Login/>
+      
     </>
   )
 }

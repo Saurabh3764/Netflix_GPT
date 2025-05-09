@@ -6,12 +6,15 @@ import { firebaseConfig } from '../utils/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../appstore/slices/userSlice';
 
 
 const Login = () => {
     const [signin, SetSignIn] = useState(true);
     const [errorMsg, SetErrorMsg] = useState(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const email = useRef(null)
     const password = useRef(null)
@@ -19,21 +22,21 @@ const Login = () => {
     const handleClick = () => {
         SetSignIn(!signin)
     }
-    const handlebuttonClick = async (e) => {
+    const handlebuttonClick =  async (e) => {
         e.preventDefault();
         const message = validate(email.current.value, password.current.value);
         SetErrorMsg(message);
 
         if (message) return;
         const app = initializeApp(firebaseConfig);
-
+        
         if (signin) {
-            await signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+             await signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
-                   console.log(user)
-                   navigate('/browse')
+                     const userdetails = userCredential.user
+                     dispatch(loginUser(userdetails));
+                    
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -42,11 +45,11 @@ const Login = () => {
                 });
         }
         else {
-            await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+             await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
-                    const user = userCredential.user;
-                    console.log(user);
-                    navigate('/browse')
+                    const userdetails = userCredential.user
+                    dispatch(loginUser(userdetails));
+                    
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -54,7 +57,9 @@ const Login = () => {
                     SetErrorMsg(errorMessage)
                 });
         }
-
+        navigate('/browse')
+    
+       
     }
     return (
         <div className='flex flex-col'>

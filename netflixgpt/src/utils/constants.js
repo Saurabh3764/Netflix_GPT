@@ -2,3 +2,15 @@ export const  LOGO = 'https://help.nflxext.com/helpcenter/OneTrust/oneTrust_prod
 
 export const BG_IMG = "https://assets.nflxext.com/ffe/siteui/vlv3/fa7be975-efc3-48c6-8188-f07fdd1aa476/web/IN-en-20250428-TRIFECTA-perspective_e045264e-b4d4-4a6f-b2cc-f95e3344a332_small.jpg"
 export const USER = "https://cdn-icons-png.flaticon.com/512/10307/10307911.png"
+
+export const API_HEADER_OPTIONS ={
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MzQwODJjMTQ1YThjYmE4ZWU1MWQ3NWYyZDQ0NWY4MiIsIm5iZiI6MTc0NjA4NTIyOS40NzIsInN1YiI6IjY4MTMyNTZkYjZiOTI3ZGMzODkxMDA3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YblmK1EnWDuKWD9SvgvdDYk0ZHL-8DuSYL1XDJ6M8Zc'
+    }
+  };
+
+export const MOVIES_API = "https://api.themoviedb.org/3/movie/"
+
+export const MOVIE_VIDEOS = "https://api.themoviedb.org/3/movie/"

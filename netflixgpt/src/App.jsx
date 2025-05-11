@@ -1,24 +1,26 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Login from './components/Login'
 import Body from './components//Body'
-import { Provider } from 'react-redux'
-import appstore from './appstore/appstore'
- 
+import { Provider, useDispatch } from 'react-redux'
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from 'react'
+import { auth } from './utils/firebase'
+import { loginUser, logoutUser } from './appstore/slices/userSlice'
+
 function App() {
-  
 
   return (
     <>
-      <Provider store={appstore}>
-      <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Login/>}/>
-            <Route path='/browse' element={<Body/>}/>
-        </Routes>
-      </BrowserRouter>
-      </Provider>
-      
+    
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/browse' element={<Body />} />
+          </Routes>
+        </BrowserRouter>
+  
+
     </>
   )
 }

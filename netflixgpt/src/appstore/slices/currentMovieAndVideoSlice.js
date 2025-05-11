@@ -14,8 +14,11 @@ const currentMovieAndVideoSlice = createSlice({
         },
         addCurrentVideo : (state,action) =>{
             state.curretvideo =  action.payload
+        },
+        clearCurrentMovieandVidoSlice : (state,action) =>{
+            return null;
         }
     }
 })
-export const {addCurrentMovie,addCurrentVideo} = currentMovieAndVideoSlice.actions;
+export const {addCurrentMovie,addCurrentVideo,clearCurrentMovieandVidoSlice} = currentMovieAndVideoSlice.actions;
 export default currentMovieAndVideoSlice.reducer

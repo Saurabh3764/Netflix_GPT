@@ -3,18 +3,19 @@ import Header from './Header'
 import { validate } from '../utils/validation';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../utils/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../appstore/slices/userSlice';
+ 
 
 
 const Login = () => {
     const [signin, SetSignIn] = useState(true);
     const [errorMsg, SetErrorMsg] = useState(null);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const email = useRef(null)
     const password = useRef(null)
@@ -22,7 +23,8 @@ const Login = () => {
     const handleClick = () => {
         SetSignIn(!signin)
     }
-    const handlebuttonClick =  async (e) => {
+    const handlebuttonClick =   (e) => {
+        let userdetails;
         e.preventDefault();
         const message = validate(email.current.value, password.current.value);
         SetErrorMsg(message);
@@ -31,13 +33,13 @@ const Login = () => {
         const app = initializeApp(firebaseConfig);
         
         if (signin) {
-             await signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+            const auth = getAuth()
+              signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     // Signed in 
-                     const userdetails = userCredential.user
-                     dispatch(loginUser(userdetails));
+                     userdetails = userCredential.user;
                     
-                })
+                })  
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
@@ -45,11 +47,11 @@ const Login = () => {
                 });
         }
         else {
-             await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+              const auth = getAuth()
+              createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
-                    const userdetails = userCredential.user
-                    dispatch(loginUser(userdetails));
-                    
+                  userdetails = userCredential.user
+                  
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -57,9 +59,7 @@ const Login = () => {
                     SetErrorMsg(errorMessage)
                 });
         }
-        navigate('/browse')
-    
-       
+        
     }
     return (
         <div className='flex flex-col'>

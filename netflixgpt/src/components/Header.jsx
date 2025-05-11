@@ -1,20 +1,55 @@
-import React from 'react'
+
 import { LOGO, USER } from '../utils/constants'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { auth } from '../utils/firebase'
+import { useNavigate } from 'react-router-dom'
+import {  loginUser, logoutUser } from '../appstore/slices/userSlice'
+import { getAuth, signOut } from 'firebase/auth'
+import { useEffect } from 'react'
+import { onAuthStateChanged } from "firebase/auth";
+import { clearmoviesSlice } from '../appstore/slices/movieSlice'
+import { clearCurrentMovieandVidoSlice } from '../appstore/slices/currentMovieAndVideoSlice'
 
 
 const Header = () => {
-  const user = useSelector((state)=>state?.user)
-  return (
-    <div className=' flex justify-between absolute z-60 w-screen'>
-      <img src={LOGO} alt='logo' className='w-30  bg-gradient-to-b from-black' />
-      {
-        user && 
-        <div className='p-1 flex flex-col justify-center items-center '>
-         <img src={USER} alt='user' className=' w-5 h-5' />  
-         <button className='bg-white p-1 text-xs mt-1'>Sign out</button>
-       </div> 
+  const user = useSelector((state) => state?.user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const {displayName, email , photoURL, phoneNumber} = user
+         dispatch(loginUser({displayName : displayName , email : email , phoneNumber : phoneNumber, photoURL : photoURL}))
+         navigate('/browse')
+      } else {
+        dispatch(logoutUser());    
+        navigate('/')
       }
+    });
+    
+  },[])
+
+  const handleSignOut =  () => {
+     
+    signOut(auth).then(() => {
+    
+    }).catch((error) => {
+
+    });
+  }
+  return (
+    <div className=' flex justify-between absolute z-60 w-screen bg-gradient-to-b from-black' >
+      <img src={LOGO} alt='logo' className='sm:w-30 w-15 bg-gradient-to-b from-black' />
+
+      {
+        user != null &&
+        <div className='p-1 flex flex-col justify-center items-center '>
+          <img src={USER} alt='user' className=' w-5 h-5' />
+          <button className='bg-white p-1 text-xs mt-1 cursor-pointer hover:border-gray-400' onClick={() => handleSignOut()}>Sign out</button>
+        </div>
+      }
+
     </div>
   )
 }

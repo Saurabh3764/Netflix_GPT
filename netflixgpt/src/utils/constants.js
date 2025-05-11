@@ -14,3 +14,5 @@ export const API_HEADER_OPTIONS ={
 export const MOVIES_API = "https://api.themoviedb.org/3/movie/"
 
 export const MOVIE_VIDEOS = "https://api.themoviedb.org/3/movie/"
+
+export const GENRES = "https://api.themoviedb.org/3/genre/movie/list"

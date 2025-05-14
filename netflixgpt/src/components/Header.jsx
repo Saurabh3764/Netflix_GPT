@@ -38,7 +38,7 @@ const Header = () => {
     });
   }
   return (
-    <div className=' flex justify-between absolute z-60 w-screen bg-gradient-to-b from-black' >
+    <div className=' flex justify-between absolute z-60  w-full bg-gradient-to-b from-black' >
       <img src={LOGO} alt='logo' className='sm:w-30 w-15 bg-gradient-to-b from-black' />
 
       {

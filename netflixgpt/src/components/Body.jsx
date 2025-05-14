@@ -5,6 +5,7 @@ import useGetMovieList from '../utils/custom_hooks/useGetMovieList';
 import usegetCurrentMovie from '../utils/custom_hooks/usegetCurrentMovie';
 import usegetCurrentVideo from '../utils/custom_hooks/usegetCurrentVideo';
 import usegetGenres from '../utils/custom_hooks/usegetGenres';
+import SecondaryContainer from './SecondaryContainer';
  
  
  
@@ -21,12 +22,10 @@ const Body = () => {
  
 
   return (
-    <div className='flex flex-col   '>
-    
+    <div className=' '>
         <Header />
         <PrimaryContainer />
- 
-
+        <SecondaryContainer/>
     </div>
   )
 }

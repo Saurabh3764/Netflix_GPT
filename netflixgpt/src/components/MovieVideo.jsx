@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 
 const MovieVideo = () => {
   const video = useSelector((state) => state?.currentmovieandvideo?.curretvideo);
- 
+  if(video === null) return;
 
   return (
-    <div className="  bg-black flex justify-center w-screen  ">
+    <div className=" bg-black flex justify-center   ">
       {
         video === null ? 
         <h1>Loading...</h1>

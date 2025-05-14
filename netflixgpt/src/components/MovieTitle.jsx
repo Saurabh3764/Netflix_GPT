@@ -10,7 +10,6 @@ const MovieTitle = () => {
     movie && movie?.genre_ids?.map((id) => {
       const genre = genres && genres.find((item) => item?.id === id);
       if (!genre?.name?.includes(" ")) {
-        console.log(genre)
         genrelist.push(genre);
       }
 
@@ -18,8 +17,8 @@ const MovieTitle = () => {
 
   }, [])
 
-  if (movie === null || genrelist == null) return;
-  return (
+ 
+  return movie && genrelist && (
     <div className='flex flex-col  bg-black text-white p-1 -mt-7 bg-gradient-to-b from-black z-60 md:-mt-55  '>
       <div className='flex flex-col sm:w-5/12 bg-gradient-to-r from-black '>
         <h1 className='text-sm p-1 md:text-3xl'>{movie?.original_title ? movie?.original_title : movie?.title}</h1>

@@ -28,7 +28,7 @@ const MovieTitle = () => {
       <div className='flex flex-row p-1 bg-gradient-to-r from-black ml-0'>
         {genrelist &&
           genrelist.map((genre, index) => (
-             <h1 key={index} className='text-red-500 text-sm m-1 p-1 pl-0  md:text-xl'>{ genre?.name}</h1>
+             <h1 key={genre?.name} className='text-red-500 text-sm m-1 p-1 pl-0  md:text-xl'>{ genre?.name}</h1>
           ))
         }
       </div>

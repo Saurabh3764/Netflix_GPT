@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import {  loginUser, logoutUser } from '../appstore/slices/userSlice'
-import { getAuth, signOut } from 'firebase/auth'
+import { signOut } from 'firebase/auth'
 import { useEffect } from 'react'
 import { onAuthStateChanged } from "firebase/auth";
-import { clearmoviesSlice } from '../appstore/slices/movieSlice'
-import { clearCurrentMovieandVidoSlice } from '../appstore/slices/currentMovieAndVideoSlice'
+ 
 
 
 const Header = () => {
@@ -17,17 +16,17 @@ const Header = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+   const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const {displayName, email , photoURL, phoneNumber} = user
          dispatch(loginUser({displayName : displayName , email : email , phoneNumber : phoneNumber, photoURL : photoURL}))
          navigate('/browse')
       } else {
-        dispatch(logoutUser());    
         navigate('/')
+        dispatch(logoutUser());  
       }
     });
-    
+    return ()=>unsubscribe()
   },[])
 
   const handleSignOut =  () => {

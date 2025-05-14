@@ -1,24 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from './Header'
 import { validate } from '../utils/validation';
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../utils/firebase';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../appstore/slices/userSlice';
  
-
 
 const Login = () => {
     const [signin, SetSignIn] = useState(true);
     const [errorMsg, SetErrorMsg] = useState(null);
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
+ 
 
     const email = useRef(null)
     const password = useRef(null)
+
     
     const handleClick = () => {
         SetSignIn(!signin)

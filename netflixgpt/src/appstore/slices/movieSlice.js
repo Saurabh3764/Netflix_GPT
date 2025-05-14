@@ -30,8 +30,12 @@ const movieSlice = createSlice({
          addgenres : (state,action)=>{
             state.genres =action.payload
          },
-         clearmoviesSlice : ()=>{
-            return null
+         clearmoviesSlice : (state)=>{
+            state.now_playing = null
+            state.top_rated =null 
+            state.popular =null
+            state.genres =null
+            state.upcoming = null
          }
     }
 

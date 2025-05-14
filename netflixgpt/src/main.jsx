@@ -8,10 +8,9 @@ import appstore from './appstore/appstore.js'
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+   
       <Provider store={appstore}>
         <App />
       </Provider>
-        
-  </StrictMode>,
+
 )

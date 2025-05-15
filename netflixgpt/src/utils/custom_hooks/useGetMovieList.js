@@ -10,7 +10,7 @@ const useGetMovieList = (movieType)=>{
     },[])
 
     const fetchMovies = async ()=>{
-        const response = await fetch(MOVIES_API + movieType, API_HEADER_OPTIONS)
+        const response = await fetch(MOVIES_API + movieType +'?language=hindi&region=in', API_HEADER_OPTIONS)
         const data = await response.json();
         if(movieType === 'now_playing') dispatch(addNowPlayingMovies(data?.results));
         if(movieType === 'top_rated') dispatch(addTopratedMovies(data?.results));

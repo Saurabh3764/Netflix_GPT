@@ -16,7 +16,8 @@ const usegetCurrentMovieVideo = ()=>{
   
         const response = await fetch(MOVIE_VIDEOS + movie?.id + "/videos", API_HEADER_OPTIONS);
         const data = await response.json();
-        dispatch(addCurrentVideo(data?.results[0]))
+        const fillteredVideos = data?.results?.filter((item)=>item.type === "Trailer" || item.type === "Teaser")
+        dispatch(addCurrentVideo(fillteredVideos? fillteredVideos[Math.floor(Math.random() * fillteredVideos?.length)] : data?.results[0]))
     }
 }
 export default usegetCurrentMovieVideo

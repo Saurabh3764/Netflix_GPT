@@ -6,12 +6,15 @@ import usegetCurrentMovie from '../utils/custom_hooks/usegetCurrentMovie';
 import usegetCurrentVideo from '../utils/custom_hooks/usegetCurrentVideo';
 import usegetGenres from '../utils/custom_hooks/usegetGenres';
 import SecondaryContainer from './SecondaryContainer';
+import { useSelector } from 'react-redux';
+import SearchPage from './SearchPage';
  
  
  
 
 const Body = () => {
-   
+  const isSearchMode = useSelector(state=>state?.appdetails?.searchmode)
+
   useGetMovieList("now_playing");
   usegetCurrentMovie();
   usegetCurrentVideo();
@@ -24,8 +27,15 @@ const Body = () => {
   return (
     <div className=' '>
         <Header />
-        <PrimaryContainer />
-        <SecondaryContainer/>
+        {
+            !isSearchMode  ?
+            <>
+                <PrimaryContainer />
+                <SecondaryContainer/>
+            </>
+            : 
+            <SearchPage/>
+        }
     </div>
   )
 }

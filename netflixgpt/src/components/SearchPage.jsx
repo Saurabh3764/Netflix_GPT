@@ -31,8 +31,8 @@ const SearchPage = () => {
         </div>
       </div>
       <div className="bg-black/90  p-2 ">
-        {searchresults?.length > 0 &&  <MovieList name="Search Results" movies={searchresults}/> }
-        {searchresults && searchtext &&<NoSearchResults/>}
+        {searchresults?.length > 0 ?  <MovieList name="Search Results" movies={searchresults}/> : <NoSearchResults/>}
+     
       </div>
     </div>
   )

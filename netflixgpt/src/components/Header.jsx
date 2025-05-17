@@ -56,7 +56,7 @@ const Header = () => {
       {
         user != null &&
         <div className='flex flex-row '>
-          <button className='sm:mx-2 mx-1 pb-4 text-xl sm:px-3 px-1 cursor-pointer' onClick={()=>handleSearchClick()}>{!isSearcMode ? "🔍" : "⬅"}</button>
+          <button className='sm:mx-2 mx-1 pb-4 text-xl sm:px-3 px-1 cursor-pointer' onClick={()=>handleSearchClick()}>{!isSearcMode ? "🔍" : "🔙"}</button>
           <div className='p-1 flex flex-col justify-center items-center '>
             <img src={USER} alt='user' className=' w-5 h-5' />
             <button className='bg-white p-1 text-xs mt-1 cursor-pointer hover:border-gray-400' onClick={() => handleSignOut()}>Sign out</button>

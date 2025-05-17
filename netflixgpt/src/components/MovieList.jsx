@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from './MovieCard'
  
 const MovieList = ({name,movies}) => {
-   console.log(movies)
+   
   return movies && (   
      <div className='flex flex-col overflow-x-scroll no-scrollbar'>
         <h1 className='text-white m-2 p-1 '>{name}</h1>
